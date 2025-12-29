@@ -19,9 +19,35 @@ export function Preview({ files }: PreviewProps) {
     return acc;
   }, {} as Record<string, string>);
 
-  if (!sandpackFiles['/App.tsx'] && !sandpackFiles['/index.tsx']) {
+  if (!sandpackFiles['/App.tsx']) {
      sandpackFiles['/App.tsx'] = `export default function App() { return <div className="p-4 text-white">No frontend code generated yet.</div> }`;
   }
+
+  // Explicitly set the entry point to ensure our App is mounted
+  const indexTsx = `
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App";
+
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+`;
+
+  const indexCss = `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+`;
 
   // --- MOCK ADAPTERS FOR PREVIEW ---
   // Since we are "Production Ready", the generated code imports real wallet adapters.
@@ -98,6 +124,8 @@ export function Preview({ files }: PreviewProps) {
                 theme={monokaiPro}
                 files={{
                     ...sandpackFiles,
+                    "/index.tsx": indexTsx, // Force entry point
+                    "/index.css": indexCss, // Basic styles
                     "/index.html": indexHtml,
 
                     // Mock @cedra/wallet-adapter-react
