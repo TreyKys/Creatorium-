@@ -73,7 +73,7 @@ Security is paramount. Creatorium does not hold your private keys. Instead, it g
 
 *   **Mainnet Integration**: Direct integration with WalletConnect for Mainnet deployments.
 *   **Visual Node Graph**: A drag-and-drop interface for visualizing contract dependencies and resource flow.
-*   **One-click Audit**: An integrated AI agent dedicated to security auditing,followed by real human expert audits, checking for common Move vulnerabilities before download.
+*   **One-click Audit**: An integrated AI agent dedicated to security auditing, checking for common Move vulnerabilities before download.
 
 ---
 
