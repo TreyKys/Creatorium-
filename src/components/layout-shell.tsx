@@ -1,79 +1,26 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Code, Play, BookOpen, Download, Cpu, Loader2, ShieldCheck } from 'lucide-react';
+import { Terminal, Play, BookOpen, Download, Cpu, Loader2, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Forge } from '@/components/forge';
 import { Preview } from '@/components/preview';
 import { Learn } from '@/components/learn';
 import { Audits } from '@/components/audits';
-import JSZip from 'jszip';
-// import { saveAs } from 'file-saver'; // We need to install file-saver or use a blob hack
-
-// Helper to save file without extra dependency if possible, or we add file-saver
-const saveFile = (blob: Blob, filename: string) => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-};
+import { useCreatoriumState } from '@/hooks/useCreatoriumState';
+import { useAIGeneration } from '@/hooks/useAIGeneration';
+import { useZipDownload } from '@/hooks/useZipDownload';
 
 export default function CreatoriumLayout() {
-  const [activeTab, setActiveTab] = useState<'forge' | 'preview' | 'learn' | 'audits'>('forge');
-  const [prompt, setPrompt] = useState('');
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedData, setGeneratedData] = useState<{
-    explanation: string;
-    files: { name: string; content: string }[];
-    learn_content: string;
-  } | null>(null);
+  const { activeTab, setActiveTab } = useCreatoriumState();
+  const { prompt, setPrompt, isGenerating, generatedData, generate } = useAIGeneration();
+  const { downloadProject } = useZipDownload();
 
   const handleGenerate = async () => {
-    if (!prompt.trim()) return;
-    
-    setIsGenerating(true);
-    setActiveTab('forge'); // Switch to forge to see progress
-
-    try {
-        const response = await fetch('/api/generate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt }),
-        });
-        
-        const data = await response.json();
-        
-        if (data.error) {
-            console.error(data.error);
-            // Ideally show toast
-            alert("Error generating project: " + data.error);
-        } else {
-            setGeneratedData(data);
-        }
-    } catch (e) {
-        console.error(e);
-        alert("Network error");
-    } finally {
-        setIsGenerating(false);
+    await generate();
+    if (activeTab !== 'forge') {
+        setActiveTab('forge');
     }
-  };
-
-  const handleDownload = async () => {
-    if (!generatedData?.files) return;
-
-    const zip = new JSZip();
-    
-    generatedData.files.forEach(file => {
-        zip.file(file.name, file.content);
-    });
-
-    const content = await zip.generateAsync({ type: "blob" });
-    saveFile(content, "cedra-forge.zip");
   };
 
   return (
@@ -119,7 +66,7 @@ export default function CreatoriumLayout() {
         <div className="w-32 flex justify-end">
              {generatedData && (
                 <button 
-                    onClick={handleDownload}
+                    onClick={() => downloadProject(generatedData.files)}
                     className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold bg-secondary/10 text-secondary border border-secondary/50 hover:bg-secondary/20 transition-all"
                 >
                     <Download className="w-3 h-3" />

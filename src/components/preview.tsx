@@ -2,9 +2,10 @@
 
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { monokaiPro } from "@codesandbox/sandpack-themes";
+import { FileNode } from '@/types';
 
 interface PreviewProps {
-  files: { name: string; content: string }[];
+  files: FileNode[];
 }
 
 export function Preview({ files }: PreviewProps) {
@@ -18,16 +19,42 @@ export function Preview({ files }: PreviewProps) {
     return acc;
   }, {} as Record<string, string>);
 
-  if (!sandpackFiles['/App.tsx'] && !sandpackFiles['/index.tsx']) {
+  if (!sandpackFiles['/App.tsx']) {
      sandpackFiles['/App.tsx'] = `export default function App() { return <div className="p-4 text-white">No frontend code generated yet.</div> }`;
   }
+
+  // Explicitly set the entry point to ensure our App is mounted
+  const indexTsx = `
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App";
+
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+`;
+
+  const indexCss = `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+`;
 
   // --- MOCK ADAPTERS FOR PREVIEW ---
   // Since we are "Production Ready", the generated code imports real wallet adapters.
   // Sandpack won't have access to private/fictional Cedra packages.
   // We inject mock implementations here.
 
-  const mockWalletAdapter = `
+  const mockWalletAdapterReact = `
     import React, { createContext, useContext, useState } from 'react';
 
     const WalletContext = createContext({ connected: false, connect: () => {}, disconnect: () => {}, account: null });
@@ -56,9 +83,9 @@ export function Preview({ files }: PreviewProps) {
     };
   `;
 
-  // We add these as hidden files in Sandpack
-  sandpackFiles['/node_modules/@cedra/wallet-adapter/index.js'] = "export const useWallet = () => { return { connected: false } }; // Placeholder"; 
-  sandpackFiles['/node_modules/@cedra/wallet-adapter-react/index.js'] = mockWalletAdapter;
+  const mockWalletAdapterBase = `
+    export const Adapter = class { constructor(name) { this.name = name; } };
+  `;
 
   // --------------------------------
 
@@ -97,10 +124,17 @@ export function Preview({ files }: PreviewProps) {
                 theme={monokaiPro}
                 files={{
                     ...sandpackFiles,
+                    "/index.tsx": indexTsx, // Force entry point
+                    "/index.css": indexCss, // Basic styles
                     "/index.html": indexHtml,
-                    // Mock the wallet adapter package
+
+                    // Mock @cedra/wallet-adapter-react
                     "/node_modules/@cedra/wallet-adapter-react/package.json": JSON.stringify({ name: "@cedra/wallet-adapter-react", main: "./index.js" }),
-                    "/node_modules/@cedra/wallet-adapter-react/index.js": mockWalletAdapter,
+                    "/node_modules/@cedra/wallet-adapter-react/index.js": mockWalletAdapterReact,
+
+                    // Mock @cedra/wallet-adapter (base)
+                    "/node_modules/@cedra/wallet-adapter/package.json": JSON.stringify({ name: "@cedra/wallet-adapter", main: "./index.js" }),
+                    "/node_modules/@cedra/wallet-adapter/index.js": mockWalletAdapterBase,
                 }}
                 options={{
                     externalResources: ["https://cdn.tailwindcss.com"],

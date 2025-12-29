@@ -1,11 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldAlert, CheckCircle, ExternalLink } from 'lucide-react';
+import { ShieldAlert, ExternalLink } from 'lucide-react';
+import { AuditRecord } from '@/types';
 
 export function Audits() {
   // Simulated audit data for the "Better UX" requirement
-  const audits = [
+  const audits: AuditRecord[] = [
     { id: 1, name: "Project-Alpha-v1", status: "passed", date: "2024-10-15", auditor: "CertiK" },
     { id: 2, name: "Token-Swap-Module", status: "pending", date: "2024-12-20", auditor: "CedraSecurity" },
     { id: 3, name: "Current-Forge-Session", status: "unsubmitted", date: "Today", auditor: "-" },

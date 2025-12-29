@@ -4,16 +4,16 @@ import { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import { Loader2 } from 'lucide-react';
 import { FileTree } from './file-tree';
-import { motion } from 'framer-motion';
+import { FileNode } from '@/types';
 
 interface ForgeProps {
   explanation: string;
-  files: { name: string; content: string }[];
+  files: FileNode[];
   isGenerating: boolean;
 }
 
 export function Forge({ explanation, files, isGenerating }: ForgeProps) {
-  const [selectedFile, setSelectedFile] = useState<{ name: string; content: string } | null>(
+  const [selectedFile, setSelectedFile] = useState<FileNode | null>(
     files.length > 0 ? files[0] : null
   );
 
