@@ -2,9 +2,10 @@
 
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { monokaiPro } from "@codesandbox/sandpack-themes";
+import { FileNode } from '@/types';
 
 interface PreviewProps {
-  files: { name: string; content: string }[];
+  files: FileNode[];
 }
 
 export function Preview({ files }: PreviewProps) {
@@ -27,7 +28,7 @@ export function Preview({ files }: PreviewProps) {
   // Sandpack won't have access to private/fictional Cedra packages.
   // We inject mock implementations here.
 
-  const mockWalletAdapter = `
+  const mockWalletAdapterReact = `
     import React, { createContext, useContext, useState } from 'react';
 
     const WalletContext = createContext({ connected: false, connect: () => {}, disconnect: () => {}, account: null });
@@ -56,9 +57,9 @@ export function Preview({ files }: PreviewProps) {
     };
   `;
 
-  // We add these as hidden files in Sandpack
-  sandpackFiles['/node_modules/@cedra/wallet-adapter/index.js'] = "export const useWallet = () => { return { connected: false } }; // Placeholder"; 
-  sandpackFiles['/node_modules/@cedra/wallet-adapter-react/index.js'] = mockWalletAdapter;
+  const mockWalletAdapterBase = `
+    export const Adapter = class { constructor(name) { this.name = name; } };
+  `;
 
   // --------------------------------
 
@@ -98,9 +99,14 @@ export function Preview({ files }: PreviewProps) {
                 files={{
                     ...sandpackFiles,
                     "/index.html": indexHtml,
-                    // Mock the wallet adapter package
+
+                    // Mock @cedra/wallet-adapter-react
                     "/node_modules/@cedra/wallet-adapter-react/package.json": JSON.stringify({ name: "@cedra/wallet-adapter-react", main: "./index.js" }),
-                    "/node_modules/@cedra/wallet-adapter-react/index.js": mockWalletAdapter,
+                    "/node_modules/@cedra/wallet-adapter-react/index.js": mockWalletAdapterReact,
+
+                    // Mock @cedra/wallet-adapter (base)
+                    "/node_modules/@cedra/wallet-adapter/package.json": JSON.stringify({ name: "@cedra/wallet-adapter", main: "./index.js" }),
+                    "/node_modules/@cedra/wallet-adapter/index.js": mockWalletAdapterBase,
                 }}
                 options={{
                     externalResources: ["https://cdn.tailwindcss.com"],
