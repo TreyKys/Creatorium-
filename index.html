@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroDev Labs — Elevating the World, One Ecosystem at a Time</title>
+  <meta name="description" content="NeuroDev Labs builds next-generation infrastructure — from elite cognitive accelerators to decentralized trust engines. Lagos, Nigeria." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta property="og:title" content="NeuroDev Labs" />
+  <meta property="og:description" content="Elevating the World, One Ecosystem at a Time." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://neurodevlabs.cloud" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="#top" aria-label="NeuroDev Labs home">
+      <svg class="nav__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="4.5" fill="currentColor"/>
+        <circle cx="5" cy="8" r="2.2" fill="currentColor" opacity=".7"/>
+        <circle cx="27" cy="7" r="2.2" fill="currentColor" opacity=".7"/>
+        <circle cx="6" cy="25" r="2.2" fill="currentColor" opacity=".7"/>
+        <circle cx="26" cy="26" r="2.2" fill="currentColor" opacity=".7"/>
+        <path d="M16 16L5 8M16 16l11-9M16 16L6 25m10-9 10 10" stroke="currentColor" stroke-width="1.2" opacity=".55"/>
+      </svg>
+      <span>NEURODEV<em>LABS</em></span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#story">Story</a>
+      <a href="#products">Products</a>
+      <a href="#engine-room">Engine Room</a>
+      <a href="#contact" class="nav__cta">Connect</a>
+    </nav>
+    <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <canvas id="lab-canvas" aria-hidden="true"></canvas>
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="hero__hud" aria-hidden="true">
+      <span class="hud__dot"></span>
+      <span id="view-label">01 // TRANSVERSE VIEW</span>
+    </div>
+
+    <div class="hero__content">
+      <p class="hero__kicker reveal">NEURODEV LABS</p>
+      <h1 class="hero__headline reveal" style="--d:.1s">
+        Elevating the World,<br /><span class="grad">One Ecosystem at a Time.</span>
+      </h1>
+      <p class="hero__sub reveal" style="--d:.2s">
+        Building next-generation infrastructure&mdash;from elite cognitive accelerators
+        to decentralized trust engines.
+      </p>
+      <a href="#story" class="btn btn--primary reveal" style="--d:.3s">LEARN MORE</a>
+    </div>
+
+    <a class="hero__scroll" href="#story" aria-label="Scroll to our story">
+      <span class="hero__scroll-line"></span>
+    </a>
+  </section>
+
+  <!-- ============ ABOUT / STORY ============ -->
+  <section class="section story" id="story">
+    <div class="section__inner">
+      <p class="section__index reveal">/01 — WHO WE ARE</p>
+      <h2 class="section__title reveal">Our Company Story</h2>
+      <div class="story__grid">
+        <div class="story__copy reveal">
+          <p>
+            NeuroDev Labs was founded in Lagos on the vision of solving complex digital and
+            real-world challenges through elegant, full-stack architecture. From tackling
+            everyday utility for a fast-moving Nigeria to building sophisticated decentralized
+            environments that work even on a basic feature phone, our focus is on creating
+            seamless, high-performance software ecosystems built for how we actually live,
+            trade, and communicate.
+          </p>
+          <p>
+            We believe technology isn&rsquo;t just about the latest apps; it&rsquo;s about
+            accelerating human potential, securing digital interactions from Yaba to Kano,
+            and bringing automated market intelligence directly to your fingertips&mdash;whether
+            you&rsquo;re on 5G in Victoria Island or USSD in a rural market.
+          </p>
+        </div>
+        <div class="story__stats reveal" style="--d:.15s">
+          <div class="stat">
+            <span class="stat__num">6</span>
+            <span class="stat__label">Products in the ecosystem</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">1</span>
+            <span class="stat__label">Live flagship — Opinions NG</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">&#8734;</span>
+            <span class="stat__label">Problems worth solving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTS — FAB 4 ============ -->
+  <section class="section products" id="products">
+    <div class="section__inner">
+      <p class="section__index reveal">/02 — PRODUCTS &amp; SERVICES</p>
+      <h2 class="section__title reveal">Meet the Fab&nbsp;4</h2>
+      <p class="section__lede reveal">
+        Four apps, one mission: turn the chaos on your phone into signal.
+      </p>
+
+      <div class="cards">
+
+        <!-- 01 MAGNUM OPUS -->
+        <article class="card reveal">
+          <div class="card__head">
+            <span class="card__num">01</span>
+            <h3>Magnum Opus</h3>
+            <span class="card__tag">Personal Knowledge Vault</span>
+          </div>
+          <p class="card__headline">Put all your reading, notes, and audio in one place&mdash;then just ask it questions.</p>
+          <p class="card__pitch">
+            Magnum Opus is a private workspace built to handle information overload. Instead of
+            getting buried under a mountain of unread documents, long web articles, and audio
+            files, drop them into a single secure space and instantly pull out exactly what you need.
+          </p>
+          <ul class="card__features">
+            <li><strong>Multi-Format Import</strong> — scanned PDFs, web article links, long voice recordings: everything is read, indexed, and instantly searchable.</li>
+            <li><strong>Interactive Document Chat</strong> — talk directly to your files; get summaries, specifics, and connecting ideas across documents at once.</li>
+            <li><strong>Focus &amp; Energy Dials</strong> — dial complexity down for plain-English answers when you&rsquo;re exhausted, or up for a detailed breakdown.</li>
+            <li><strong>Private Storage</strong> — documents, scans, and chat histories live on your own device. Your library stays yours.</li>
+          </ul>
+        </article>
+
+        <!-- 02 SIFT -->
+        <article class="card reveal" style="--d:.08s">
+          <div class="card__head">
+            <span class="card__num">02</span>
+            <h3>Sift</h3>
+            <span class="card__tag">Smart Screenshot Ingestion &amp; Optimization</span>
+          </div>
+          <p class="card__headline">Search your screenshots. Clean the clutter.</p>
+          <p class="card__pitch">
+            Sift is an intelligent, privacy-first screenshot management platform that transforms
+            your chaotic camera roll into an instantly searchable, self-optimizing database.
+            Running a high-performance local Isar NoSQL database, Sift reads, indexes, and
+            organizes your media entirely in the background.
+          </p>
+          <ul class="card__features">
+            <li><strong>Semantic Tag Engine</strong> — local OCR plus lightweight LLM processing auto-categorizes and indexes screenshots by their actual contents.</li>
+            <li><strong>Conversational Search</strong> — locate receipts, code snippets, or old conversations just by describing what you remember.</li>
+            <li><strong>Smart Purge &amp; De-duplication</strong> — a dedicated sweep that clears near-duplicates, expired temp shots, and junk memes to keep storage pristine.</li>
+          </ul>
+        </article>
+
+        <!-- 03 CONTEXT -->
+        <article class="card reveal" style="--d:.16s">
+          <div class="card__head">
+            <span class="card__num">03</span>
+            <h3>Context</h3>
+            <span class="card__tag">The Vibe Translator</span>
+          </div>
+          <p class="card__headline">Decode the internet in real-time.</p>
+          <p class="card__pitch">
+            Context is a frictionless, on-screen overlay dictionary designed to bridge the gap
+            between static definitions and fluid internet culture. Built with Flutter and powered
+            by Firebase Vertex AI, Context runs a floating background service that analyzes
+            on-screen text on the fly&mdash;without leaving your current app.
+          </p>
+          <ul class="card__features">
+            <li><strong>Vibe Translation</strong> — LLM semantic analysis decodes slang, cultural references, and memes that standard dictionaries miss.</li>
+            <li><strong>Floating Screen Overlay</strong> — instant contextual lookups via an unobtrusive floating window over WhatsApp, X, or any browser.</li>
+            <li><strong>Hybrid Knowledge Base</strong> — generative AI synthesis backed by classical dictionary APIs and Wikipedia fallbacks for rock-solid accuracy.</li>
+          </ul>
+        </article>
+
+        <!-- 04 OPINIONS NG -->
+        <article class="card card--live reveal" style="--d:.24s">
+          <div class="card__head">
+            <span class="card__num">04</span>
+            <h3>Opinions NG</h3>
+            <span class="card__tag card__tag--live"><span class="pulse-dot"></span>LIVE — FLAGSHIP</span>
+          </div>
+          <p class="card__headline">Where Nigeria calls it before it happens.</p>
+          <p class="card__pitch">
+            Our biggest product, live today. Opinions NG is a peer-to-peer forecasting and opinion
+            marketplace built to handle sports and current-affairs pools cleanly&mdash;featuring
+            quick local payment checkouts and automatic result updates.
+          </p>
+          <ul class="card__features">
+            <li><strong>Peer-to-Peer Pools</strong> — clean, transparent forecasting markets for sports and current affairs.</li>
+            <li><strong>Local Payment Checkouts</strong> — fast, familiar Nigerian payment rails, in and out.</li>
+            <li><strong>Automatic Result Updates</strong> — outcomes resolve and settle without manual drama.</li>
+          </ul>
+          <a class="btn btn--ghost" href="https://opinionsng.com" target="_blank" rel="noopener">
+            VISIT OPINIONSNG.COM &nearr;
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENGINE ROOM — INFRASTRUCTURE ============ -->
+  <section class="section engine" id="engine-room">
+    <div class="section__inner">
+      <p class="section__index reveal">/03 — THE ENGINE ROOM</p>
+      <h2 class="section__title reveal">Heavy Infrastructure</h2>
+      <p class="section__lede reveal">
+        The deep systems underneath the ecosystem — trust engines and zero-interface pipelines.
+      </p>
+
+      <div class="cards cards--wide">
+
+        <!-- 05 INTEGRO -->
+        <article class="card card--dark reveal">
+          <div class="card__head">
+            <span class="card__num">05</span>
+            <h3>Integro Ecosystem</h3>
+            <span class="card__tag card__tag--dev">IN DEVELOPMENT</span>
+          </div>
+          <p class="card__headline">High-integrity peer-to-peer infrastructure.</p>
+          <p class="card__pitch">
+            Integro is a heavy-duty decentralized trust engine and peer-to-peer financial network
+            built natively on the high-performance Hedera network. By combining smart-contract
+            asset backing with decentralized lending primitives and offline accessibility, Integro
+            provides an all-in-one ecosystem for trustless asset trading, liquidity allocation,
+            and peer-to-peer financing.
+          </p>
+          <ul class="card__features">
+            <li><strong>Smart Lending Pools</strong> — securely deposit liquidity, monitor active terms, and borrow against tokenized assets via code-enforced pools <code>(LendingPool.sol)</code>.</li>
+            <li><strong>Immutable Escrow Architecture</strong> — programmatic market escrow that locks, verifies, and settles peer-to-peer listings without middle-tier institutions <code>(Escrow.sol)</code>.</li>
+            <li><strong>USSD Mobile Bridging</strong> — an embedded USSD simulator layer proves ledger interaction over basic telecom channels: decentralized finance, completely offline, on low-end feature phones.</li>
+            <li><strong>Native Hedera Token Integration</strong> — micro-fee, high-throughput minting, asset indexing, and security staking on Hedera&rsquo;s token architecture <code>(AssetToken.sol)</code>.</li>
+          </ul>
+        </article>
+
+        <!-- 06 CONVERSATIONAL LEDGER -->
+        <article class="card card--dark reveal" style="--d:.1s">
+          <div class="card__head">
+            <span class="card__num">06</span>
+            <h3>Conversational Ledger <span class="card__alias">(LedgerX)</span></h3>
+            <span class="card__tag">Voice-First WhatsApp Bookkeeping</span>
+          </div>
+          <p class="card__headline">Zero-interface bookkeeping for fast-paced commerce.</p>
+          <p class="card__pitch">
+            Conversational Ledger is a zero-UI transactional ledger operating natively inside
+            WhatsApp. Engineered for merchants who can&rsquo;t afford to stop and type out receipts,
+            the platform uses a text and voice-first pipeline to process raw conversational notes
+            into immaculate, structured financial ledgers on the fly.
+          </p>
+          <ul class="card__features">
+            <li><strong>Naija Voice Core (ASR &amp; Phonetics)</strong> — a specialized speech-recognition framework and phonetic lexicon fine-tuned to parse localized speech, marketplace slang, and colloquial financial numbers straight from voice notes.</li>
+            <li><strong>Natural Language Parsing Engine</strong> — deconstructs raw text and transcriptions into structured digital slips: transaction types, exact currency amounts, product categories.</li>
+            <li><strong>Frictionless WhatsApp Pipeline</strong> — listens to chat webhooks, validates, updates accounting state, and returns instant confirmations and balances. No external app required.</li>
+            <li><strong>Relational Ledger Storage</strong> — a transactional schema handling robust balance tracking, real-time historic audits, and market data records.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact" id="contact">
+    <div class="section__inner">
+      <p class="section__index reveal">/04 — GET IN TOUCH</p>
+      <h2 class="section__title reveal">Connect with Us</h2>
+      <div class="contact__grid">
+        <div class="contact__block reveal">
+          <span class="contact__label">Mailing Address</span>
+          <p>Lagos, Nigeria</p>
+        </div>
+        <div class="contact__block reveal" style="--d:.1s">
+          <span class="contact__label">Email Address</span>
+          <p><a href="mailto:hello@neurodevlabs.cloud">hello@neurodevlabs.cloud</a></p>
+        </div>
+        <div class="contact__block reveal" style="--d:.2s">
+          <span class="contact__label">Social</span>
+          <p class="contact__social">
+            <a href="https://www.linkedin.com/company/neurodevlabs" target="_blank" rel="noopener">LinkedIn</a>
+            <span aria-hidden="true">|</span>
+            <a href="https://x.com/neurodevlabs" target="_blank" rel="noopener">X (Twitter)</a>
+            <span aria-hidden="true">|</span>
+            <a href="https://github.com/TreyKys" target="_blank" rel="noopener">GitHub</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span>&copy; <span id="year">2026</span> NeuroDev Labs. Lagos, Nigeria.</span>
+      <span class="footer__tag">Elevating the world, one ecosystem at a time.</span>
+    </div>
+  </footer>
+
+  <script src="neuro-lab.js" defer></script>
+  <script src="site.js" defer></script>
+</body>
+</html>
