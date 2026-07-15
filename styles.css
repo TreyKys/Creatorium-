@@ -1,28 +1,30 @@
 /* ============================================================
    NEURODEV LABS — styles.css
-   Brand tokens live here. When the official brand colours land,
-   swap the values in :root and the whole site re-themes.
+   Brand: cream + ink monochrome (from the ndevl. brand assets),
+   with restrained status colours for LIVE / IN-DEV badges.
+   All tokens live in :root — swap there to re-theme.
    ============================================================ */
 
 :root {
-  /* --- Brand palette (placeholder until official colours) --- */
-  --bg-0: #04070f;          /* deepest background */
-  --bg-1: #080d1a;          /* section background */
-  --bg-2: #0d1526;          /* card background */
-  --line: rgba(148, 178, 255, 0.14);
-  --ink-0: #eef3ff;         /* primary text */
-  --ink-1: #9fb0cc;         /* secondary text */
-  --ink-2: #62718e;         /* muted text */
-  --accent: #35e0ff;        /* synapse cyan */
-  --accent-2: #8b5cf6;      /* neuro violet */
-  --accent-warm: #ffb347;   /* pulse amber */
-  --live: #34e39a;          /* live-status green */
+  /* --- Brand palette (from ndevl. assets) --- */
+  --bg-0: #f4f1e7;          /* cream canvas */
+  --bg-1: #efebdd;          /* section cream, one shade deeper */
+  --bg-2: #f9f7ef;          /* card surface, one shade lighter */
+  --line: rgba(28, 27, 20, 0.14);
+  --ink-0: #1c1b14;         /* brand ink */
+  --ink-1: #4c4a3e;         /* secondary text */
+  --ink-2: #8a8778;         /* muted text */
+  --accent: #1c1b14;        /* the brand is monochrome — accent IS ink */
+  --accent-soft: #5c5947;   /* warm graphite for gradients */
+  --gold: #9c7a2e;          /* warm pulse — the "signal" colour */
+  --live: #3e7247;          /* status: live */
+  --dev: #9c6b1f;           /* status: in development */
 
   --font-display: "Space Grotesk", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
 
   --max: 1180px;
-  --radius: 18px;
+  --radius: 14px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,10 +40,10 @@ body {
   overflow-x: hidden;
 }
 
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: var(--ink-0); text-decoration: underline; text-decoration-color: rgba(28, 27, 20, 0.35); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--ink-0); }
 
-::selection { background: var(--accent-2); color: #fff; }
+::selection { background: var(--ink-0); color: var(--bg-0); }
 
 /* ============ NAV ============ */
 .nav {
@@ -52,29 +54,31 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: space-between;
   padding: 1.1rem clamp(1.2rem, 4vw, 3rem);
-  background: linear-gradient(rgba(4, 7, 15, 0.82), rgba(4, 7, 15, 0));
-  backdrop-filter: blur(2px);
-  transition: background 0.35s ease;
+  background: linear-gradient(rgba(244, 241, 231, 0.9), rgba(244, 241, 231, 0));
+  transition: background 0.35s ease, border-color 0.35s ease;
+  border-bottom: 1px solid transparent;
 }
 .nav.is-scrolled {
-  background: rgba(4, 7, 15, 0.88);
+  background: rgba(244, 241, 231, 0.92);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
+  border-bottom-color: var(--line);
 }
 
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: 0.14em;
-  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  font-size: 1.35rem;
   color: var(--ink-0);
+  text-decoration: none;
+  text-transform: lowercase;
 }
 .nav__brand:hover { text-decoration: none; }
-.nav__brand em { font-style: normal; color: var(--accent); }
-.nav__mark { width: 30px; height: 30px; color: var(--accent); }
+.nav__brand em { font-style: normal; }
+.nav__mark { width: 46px; height: 28px; color: var(--ink-0); }
 
 .nav__links {
   display: flex;
@@ -84,17 +88,17 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.nav__links a { color: var(--ink-1); font-weight: 500; }
-.nav__links a:hover { color: var(--ink-0); text-decoration: none; }
+.nav__links a { color: var(--ink-1); font-weight: 500; text-decoration: none; }
+.nav__links a:hover { color: var(--ink-0); }
 
 .nav__cta {
   padding: 0.5rem 1.15rem;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--ink-0);
   border-radius: 999px;
-  color: var(--accent) !important;
+  color: var(--ink-0) !important;
   transition: background 0.25s ease, color 0.25s ease;
 }
-.nav__cta:hover { background: var(--accent); color: var(--bg-0) !important; }
+.nav__cta:hover { background: var(--ink-0); color: var(--bg-0) !important; }
 
 .nav__burger {
   display: none;
@@ -133,7 +137,7 @@ a:hover { text-decoration: underline; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 90% 70% at 50% 45%, rgba(4, 7, 15, 0.18) 0%, rgba(4, 7, 15, 0.72) 78%, rgba(4, 7, 15, 0.94) 100%);
+    radial-gradient(ellipse 78% 60% at 50% 44%, rgba(244, 241, 231, 0.86) 0%, rgba(244, 241, 231, 0.45) 62%, rgba(244, 241, 231, 0) 100%);
   pointer-events: none;
 }
 
@@ -147,23 +151,21 @@ a:hover { text-decoration: underline; }
   font-family: var(--font-display);
   font-size: 0.72rem;
   letter-spacing: 0.22em;
-  color: var(--ink-2);
+  color: var(--ink-1);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.45rem 0.95rem;
-  background: rgba(8, 13, 26, 0.55);
+  background: rgba(249, 247, 239, 0.75);
   backdrop-filter: blur(8px);
 }
 .hud__dot {
   width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 10px var(--accent);
+  background: var(--gold);          /* square node, like the monogram circuits */
   animation: hudPulse 2.4s ease-in-out infinite;
 }
 @keyframes hudPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.72); }
+  50% { opacity: 0.35; transform: scale(0.72); }
 }
 #view-label { transition: opacity 0.4s ease; }
 #view-label.is-switching { opacity: 0; }
@@ -179,8 +181,9 @@ a:hover { text-decoration: underline; }
 .hero__kicker {
   font-family: var(--font-display);
   font-size: 0.82rem;
+  font-weight: 600;
   letter-spacing: 0.5em;
-  color: var(--accent);
+  color: var(--ink-1);
   margin-bottom: 1.4rem;
 }
 
@@ -189,11 +192,11 @@ a:hover { text-decoration: underline; }
   font-weight: 700;
   font-size: clamp(2.4rem, 6.4vw, 4.6rem);
   line-height: 1.08;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   margin-bottom: 1.4rem;
 }
 .grad {
-  background: linear-gradient(92deg, var(--accent) 0%, var(--accent-2) 60%, var(--accent-warm) 115%);
+  background: linear-gradient(92deg, var(--ink-0) 20%, var(--accent-soft) 85%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -214,16 +217,17 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.22em;
   padding: 0.95rem 2.4rem;
   border-radius: 999px;
+  text-decoration: none;
   transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease;
 }
 .btn:hover { text-decoration: none; transform: translateY(-2px); }
 
 .btn--primary {
-  background: var(--accent);
-  color: #041018;
-  box-shadow: 0 0 32px rgba(53, 224, 255, 0.35);
+  background: var(--ink-0);
+  color: var(--bg-0);
+  box-shadow: 0 10px 28px rgba(28, 27, 20, 0.22);
 }
-.btn--primary:hover { box-shadow: 0 6px 44px rgba(53, 224, 255, 0.55); }
+.btn--primary:hover { box-shadow: 0 14px 36px rgba(28, 27, 20, 0.3); }
 
 .btn--ghost {
   margin-top: 1.4rem;
@@ -232,7 +236,7 @@ a:hover { text-decoration: underline; }
   padding: 0.7rem 1.6rem;
   font-size: 0.78rem;
 }
-.btn--ghost:hover { background: var(--live); color: #04120b; }
+.btn--ghost:hover { background: var(--live); color: var(--bg-0); }
 
 .hero__scroll {
   position: absolute;
@@ -245,7 +249,7 @@ a:hover { text-decoration: underline; }
   display: block;
   width: 1px;
   height: 52px;
-  background: linear-gradient(var(--accent), transparent);
+  background: linear-gradient(var(--ink-0), transparent);
   animation: scrollHint 2.2s ease-in-out infinite;
 }
 @keyframes scrollHint {
@@ -262,8 +266,9 @@ a:hover { text-decoration: underline; }
 .section__index {
   font-family: var(--font-display);
   font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.34em;
-  color: var(--accent);
+  color: var(--ink-2);
   margin-bottom: 1rem;
 }
 
@@ -271,7 +276,7 @@ a:hover { text-decoration: underline; }
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.9rem, 4.4vw, 3.1rem);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   margin-bottom: 1.2rem;
 }
 
@@ -307,14 +312,14 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.4rem 1.6rem;
-  background: rgba(13, 21, 38, 0.55);
+  background: var(--bg-2);
 }
 .stat__num {
   display: block;
   font-family: var(--font-display);
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--ink-0);
   line-height: 1.1;
 }
 .stat__label {
@@ -347,21 +352,21 @@ a:hover { text-decoration: underline; }
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  height: 3px;
+  background: var(--ink-0);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 .card:hover {
   transform: translateY(-5px);
-  border-color: rgba(53, 224, 255, 0.35);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  border-color: rgba(28, 27, 20, 0.4);
+  box-shadow: 0 24px 48px rgba(28, 27, 20, 0.12);
 }
 .card:hover::before { opacity: 1; }
 
-.card--dark { background: rgba(8, 13, 26, 0.85); }
-.card--live { border-color: rgba(52, 227, 154, 0.35); }
-.card--live::before { background: linear-gradient(90deg, var(--live), var(--accent)); }
+.card--dark { background: var(--bg-0); }
+.card--live { border-color: rgba(62, 114, 71, 0.45); }
+.card--live::before { background: var(--live); }
 
 .card__head {
   display: flex;
@@ -373,6 +378,7 @@ a:hover { text-decoration: underline; }
 .card__num {
   font-family: var(--font-display);
   font-size: 0.8rem;
+  font-weight: 600;
   letter-spacing: 0.2em;
   color: var(--ink-2);
 }
@@ -388,7 +394,7 @@ a:hover { text-decoration: underline; }
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-2);
+  color: var(--ink-1);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.28rem 0.75rem;
@@ -398,15 +404,13 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 0.45rem;
   color: var(--live);
-  border-color: rgba(52, 227, 154, 0.4);
+  border-color: rgba(62, 114, 71, 0.5);
 }
-.card__tag--dev { color: var(--accent-warm); border-color: rgba(255, 179, 71, 0.4); }
+.card__tag--dev { color: var(--dev); border-color: rgba(156, 107, 31, 0.45); }
 
 .pulse-dot {
   width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--live);
-  box-shadow: 0 0 8px var(--live);
+  background: var(--live);          /* square, like the monogram nodes */
   animation: hudPulse 1.8s ease-in-out infinite;
 }
 
@@ -439,17 +443,15 @@ a:hover { text-decoration: underline; }
   content: "";
   position: absolute;
   left: 0;
-  top: 0.52em;
+  top: 0.55em;
   width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--accent-2);
-  box-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
+  background: var(--ink-0);         /* square circuit-node bullet */
 }
 .card__features strong { color: var(--ink-0); font-weight: 600; }
 .card__features code {
   font-size: 0.82em;
-  color: var(--accent);
-  background: rgba(53, 224, 255, 0.08);
+  color: var(--ink-0);
+  background: rgba(28, 27, 20, 0.07);
   border-radius: 6px;
   padding: 0.08em 0.4em;
 }
@@ -457,7 +459,7 @@ a:hover { text-decoration: underline; }
 /* ============ CONTACT ============ */
 .contact {
   background:
-    radial-gradient(ellipse 70% 90% at 50% 110%, rgba(139, 92, 246, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 90% at 50% 115%, rgba(156, 122, 46, 0.12) 0%, transparent 65%),
     var(--bg-0);
 }
 
@@ -472,15 +474,16 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.8rem;
-  background: rgba(13, 21, 38, 0.45);
+  background: var(--bg-2);
 }
 .contact__label {
   display: block;
   font-family: var(--font-display);
   font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--ink-2);
   margin-bottom: 0.75rem;
 }
 .contact__block p { font-size: 1.05rem; }
@@ -527,7 +530,7 @@ a:hover { text-decoration: underline; }
     inset: 0;
     flex-direction: column;
     justify-content: center;
-    background: rgba(4, 7, 15, 0.96);
+    background: rgba(244, 241, 231, 0.97);
     backdrop-filter: blur(18px);
     font-size: 1.1rem;
     gap: 2.2rem;

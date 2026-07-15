@@ -69,9 +69,13 @@ Two ways to do it — pick one:
 - **Netlify:** nothing to migrate. Since DNS is on Hostinger and the files are served from
   Hostinger, Netlify is simply not in the loop for this domain.
 
-## Re-theming when brand assets arrive
+## Brand
 
-All colours are defined once at the top of `styles.css` under `:root` (`--accent`,
-`--accent-2`, `--bg-0`, …). Swap those values and the entire site — including the hero
-animation scrim and cards — re-themes. The canvas animation colours are in the `C`
-object at the top of `neuro-lab.js`.
+The site follows the official ndevl. brand assets: cream (`#f4f1e7`) + ink (`#1c1b14`)
+monochrome, with the "nl." circuit monogram recreated as an inline SVG (nav) and as
+`assets/favicon.svg`. Square bullets and nodes throughout echo the monogram's circuit
+dendrites; a warm gold (`#9c7a2e`) carries the "pulse/signal" moments in the hero
+animation, and muted green/amber are used only as LIVE / IN-DEV status colours.
+
+All tokens are defined once at the top of `styles.css` under `:root` — adjust there to
+re-theme. The canvas animation colours are in the `C` object at the top of `neuro-lab.js`.

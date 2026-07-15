@@ -22,12 +22,16 @@
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- palette (mirrors styles.css tokens) ---------- */
+  /* ---------- palette (mirrors styles.css tokens) ----------
+     Brand is cream + ink monochrome; workers and structures are
+     ink line-art, the beat pulse flashes warm gold. Key names:
+     cyan = workers/neurons, violet = structures/synapses,
+     amber = beat flash, ink = grids and scaffolding. */
   var C = {
-    cyan: "53, 224, 255",
-    violet: "139, 92, 246",
-    amber: "255, 179, 71",
-    ink: "159, 176, 204"
+    cyan: "28, 27, 20",
+    violet: "76, 74, 62",
+    amber: "156, 122, 46",
+    ink: "28, 27, 20"
   };
   function rgba(rgb, a) { return "rgba(" + rgb + "," + a + ")"; }
 
@@ -383,8 +387,8 @@
       var flash = flashOf(beatPhase(ag, t));
       var r = (2.4 + flash * 4) * p.s;
       var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3.2);
-      grad.addColorStop(0, rgba(C.cyan, alpha * (0.5 + flash * 0.5)));
-      grad.addColorStop(1, rgba(C.cyan, 0));
+      grad.addColorStop(0, rgba(C.amber, alpha * (0.16 + flash * 0.3)));
+      grad.addColorStop(1, rgba(C.amber, 0));
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(p.x, p.y, r * 3.2, 0, Math.PI * 2);
@@ -412,10 +416,10 @@
     var t = now / 1000;
     ctx.clearRect(0, 0, W, H);
 
-    /* ambient depth glow behind everything */
+    /* soft warm vignette so the colony sits in a focal pool */
     var bgGrad = ctx.createRadialGradient(W * 0.5, H * 0.42, 0, W * 0.5, H * 0.42, Math.max(W, H) * 0.7);
-    bgGrad.addColorStop(0, "rgba(13, 21, 38, 0.85)");
-    bgGrad.addColorStop(1, "rgba(4, 7, 15, 0)");
+    bgGrad.addColorStop(0, "rgba(28, 27, 20, 0)");
+    bgGrad.addColorStop(1, "rgba(28, 27, 20, 0.06)");
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, W, H);
 
