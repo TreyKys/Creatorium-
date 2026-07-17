@@ -8,7 +8,7 @@ The official website for [neurodevlabs.cloud](https://neurodevlabs.cloud) — La
 
 Pure static HTML / CSS / vanilla JS. **No build step, no dependencies, no framework.**
 Open `index.html` in a browser and it works. This is deliberate: the whole site can be
-uploaded to any static host (including Hostinger shared hosting) as-is.
+uploaded to any static host as-is.
 
 | File | Purpose |
 |---|---|
@@ -17,6 +17,8 @@ uploaded to any static host (including Hostinger shared hosting) as-is.
 | `neuro-lab.js` | The animated hero: a lab-civilization of tiny builders working in neural sync, looping through Transverse → Longitudinal → Overhead → Synaptic views |
 | `site.js` | Nav behaviour, mobile menu, scroll-reveal animations |
 | `assets/favicon.svg` | Neuron favicon |
+| `privacy/context.html`, `privacy/magnum-opus.html` | Public privacy policy pages required by app stores |
+| `netlify.toml` | Netlify build/publish config (no build step; publishes the repo root) |
 
 ## Local preview
 
@@ -26,48 +28,62 @@ python3 -m http.server 8080
 # then open http://localhost:8080
 ```
 
-## 🚀 Deploying to Hostinger (neurodevlabs.cloud)
+## 🚀 Deploying to Netlify (neurodevlabs.cloud)
 
-Your domain and mail already live on Hostinger, so the site should be hosted there too.
-Two ways to do it — pick one:
+The site is hosted on Netlify; **Hostinger stays in charge of DNS and mail** — we only
+repoint two DNS records so the domain resolves to Netlify instead. Mail (MX records) is
+never touched.
 
-### Option A — File Manager upload (quickest, 5 minutes)
+### 1. Create the Netlify site
 
-1. Log in to [hpanel.hostinger.com](https://hpanel.hostinger.com).
-2. Go to **Websites → neurodevlabs.cloud → Dashboard → File Manager**.
-3. Open the **`public_html`** folder.
-4. Delete any placeholder files in there (`default.php`, "coming soon" pages, etc.).
-5. Upload these files/folders **directly into `public_html`** (not into a subfolder):
-   - `index.html`
-   - `styles.css`
-   - `neuro-lab.js`
-   - `site.js`
-   - `assets/` (the whole folder)
-   > Tip: on your computer, select the files → right-click → compress to `site.zip`,
-   > upload the single zip, then right-click it in File Manager → **Extract**. Make sure
-   > `index.html` ends up at `public_html/index.html`, then delete the zip.
-6. Visit `https://neurodevlabs.cloud` — the site is live.
+1. Log in to [app.netlify.com](https://app.netlify.com) → **Add new site → Import an
+   existing project**.
+2. Connect GitHub, pick `TreyKys/Creatorium-`, branch `main` (merge this branch into
+   `main` first).
+3. Build settings are already set by `netlify.toml` in this repo — publish directory `.`,
+   no build command. Click **Deploy**.
+4. You'll get a temporary `your-site-name.netlify.app` URL. **Test the whole site there
+   first** before touching DNS.
 
-### Option B — Git auto-deploy (updates on every push)
+### 2. Point the domain at Netlify — without moving mail
 
-1. In hPanel go to **Websites → neurodevlabs.cloud → Advanced → GIT**.
-2. Under **Create a New Repository**:
-   - **Repository address:** `https://github.com/TreyKys/Creatorium-.git`
-   - **Branch:** `main` (merge this branch into `main` first)
-   - **Directory:** leave blank (deploys straight into `public_html`)
-3. Click **Create**, then **Deploy**. For private repos, hPanel shows an SSH key to add
-   under GitHub → repo → **Settings → Deploy keys**.
-4. Optional: copy the **webhook URL** hPanel gives you into GitHub → repo →
-   **Settings → Webhooks** so every push to `main` redeploys automatically.
+1. In the Netlify site → **Domain management → Add a domain** → enter
+   `neurodevlabs.cloud`.
+2. When Netlify asks how to configure DNS, choose the option to **keep your current DNS
+   provider** (do *not* delegate nameservers to Netlify — that would hand Hostinger's
+   whole DNS zone, MX records included, over to Netlify, which is exactly what we want to
+   avoid). Netlify will instead show you the exact record values to add — usually:
+   - An **A record** for `@` (root domain) → Netlify's load balancer IP
+   - A **CNAME** for `www` → `your-site-name.netlify.app`
+   Use the values Netlify's dashboard shows you, not the ones above from memory — they
+   can change.
+3. **Before editing anything**, go to Hostinger hPanel → **Domains → neurodevlabs.cloud →
+   DNS / Nameservers → DNS Zone Editor** and screenshot the current records — especially
+   the **MX** records and any **SPF/DKIM/DMARC TXT** records for mail. This is your backup.
+4. In that same DNS Zone Editor, **edit only** the `A` record for `@` and the `CNAME` for
+   `www` to the Netlify values from step 2. **Do not touch, delete, or replace any MX or
+   mail-related TXT record**, and do not change the domain's nameservers.
+5. Wait for DNS to propagate (usually under an hour, can take up to 24–48h). Check with:
+   ```bash
+   dig neurodevlabs.cloud A       # should show Netlify's IP
+   dig neurodevlabs.cloud MX      # should be unchanged from your screenshot
+   ```
+6. Back in Netlify, once the domain verifies, enable **HTTPS** (free, automatic via
+   Let's Encrypt).
 
-### After deploying (both options)
+### 3. Confirm nothing broke
 
-- **Force HTTPS:** hPanel → your website → **Security → SSL** → make sure the certificate
-  is active and **Force HTTPS** is on.
-- **Mail is untouched:** uploading website files to `public_html` has zero effect on your
-  MX/mail records — your `@neurodevlabs.cloud` mailboxes keep working exactly as before.
-- **Netlify:** nothing to migrate. Since DNS is on Hostinger and the files are served from
-  Hostinger, Netlify is simply not in the loop for this domain.
+- Visit `https://neurodevlabs.cloud` — the new site should load.
+- Send yourself a test email to and from an `@neurodevlabs.cloud` address to confirm mail
+  still works exactly as before.
+- Every future `git push` to `main` auto-redeploys the site — no manual upload step.
+
+### If you decide to self-host on Hostinger instead
+
+Hostinger hosting plans include a **File Manager** for uploading files straight into
+`public_html`, and a **Git** deploy option under **Advanced → GIT**. If your current
+Hostinger plan doesn't show a File Manager, it likely only covers the domain + mail, not
+web hosting — which is exactly why Netlify (free) is the simpler path here.
 
 ## Brand
 

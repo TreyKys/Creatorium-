@@ -1,0 +1,13 @@
+# NeuroDev Labs — static site, no build step.
+[build]
+  publish = "."
+
+# Privacy policy pages are plain files served as-is at /privacy/<app>.html.
+# Add redirects here later if you want prettier URLs, e.g. /privacy/context.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
