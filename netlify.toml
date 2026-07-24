@@ -2,8 +2,8 @@
 [build]
   publish = "."
 
-# Privacy policy pages are plain files served as-is at /privacy/<app>.html.
-# Add redirects here later if you want prettier URLs, e.g. /privacy/context.
+# Privacy policy pages live at /Context/privacy and /Magnumopus/privacy
+# (each is a folder with its own index.html, so the clean URL just works).
 
 [[headers]]
   for = "/*"

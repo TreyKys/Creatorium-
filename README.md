@@ -17,7 +17,8 @@ uploaded to any static host as-is.
 | `neuro-lab.js` | The animated hero: a lab-civilization of tiny builders working in neural sync, looping through Transverse → Longitudinal → Overhead → Synaptic views |
 | `site.js` | Nav behaviour, mobile menu, scroll-reveal animations |
 | `assets/favicon.svg` | Neuron favicon |
-| `privacy/context.html`, `privacy/magnum-opus.html` | Public privacy policy pages required by app stores |
+| `Context/privacy/index.html` | Context's public privacy policy, served at `/Context/privacy` |
+| `Magnumopus/privacy/index.html` | Magnum Opus's public privacy policy, served at `/Magnumopus/privacy` |
 | `netlify.toml` | Netlify build/publish config (no build step; publishes the repo root) |
 
 ## Local preview
