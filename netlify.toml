@@ -2,7 +2,7 @@
 [build]
   publish = "."
 
-# Privacy policy pages live at /Context/privacy and /Magnumopus/privacy
+# Privacy policy pages live at /Context/privacy and /magnum-opus/privacy
 # (each is a folder with its own index.html, so the clean URL just works).
 
 [[headers]]

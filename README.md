@@ -18,7 +18,7 @@ uploaded to any static host as-is.
 | `site.js` | Nav behaviour, mobile menu, scroll-reveal animations |
 | `assets/favicon.svg` | Neuron favicon |
 | `Context/privacy/index.html` | Context's public privacy policy, served at `/Context/privacy` |
-| `Magnumopus/privacy/index.html` | Magnum Opus's public privacy policy, served at `/Magnumopus/privacy` |
+| `magnum-opus/privacy/index.html` | Magnum Opus's public privacy policy, served at `/magnum-opus/privacy` |
 | `netlify.toml` | Netlify build/publish config (no build step; publishes the repo root) |
 
 ## Local preview
