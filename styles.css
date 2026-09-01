@@ -7,9 +7,9 @@
 
 :root {
   /* --- Brand palette (from ndevl. assets) --- */
-  --bg-0: #f4f1e7;          /* cream canvas */
-  --bg-1: #efebdd;          /* section cream, one shade deeper */
-  --bg-2: #f9f7ef;          /* card surface, one shade lighter */
+  --bg-0: #e4dfcb;          /* cream canvas, darkened */
+  --bg-1: #d8d2ba;          /* section cream, one shade deeper */
+  --bg-2: #ece6d4;          /* card surface, one shade lighter */
   --line: rgba(28, 27, 20, 0.14);
   --ink-0: #1c1b14;         /* brand ink */
   --ink-1: #4c4a3e;         /* secondary text */
@@ -140,35 +140,6 @@ a:hover { text-decoration-color: var(--ink-0); }
     radial-gradient(ellipse 78% 60% at 50% 44%, rgba(244, 241, 231, 0.86) 0%, rgba(244, 241, 231, 0.45) 62%, rgba(244, 241, 231, 0) 100%);
   pointer-events: none;
 }
-
-.hero__hud {
-  position: absolute;
-  top: 5.4rem;
-  right: clamp(1.2rem, 4vw, 3rem);
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  color: var(--ink-1);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.45rem 0.95rem;
-  background: rgba(249, 247, 239, 0.75);
-  backdrop-filter: blur(8px);
-}
-.hud__dot {
-  width: 7px; height: 7px;
-  background: var(--gold);          /* square node, like the monogram circuits */
-  animation: hudPulse 2.4s ease-in-out infinite;
-}
-@keyframes hudPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(0.72); }
-}
-#view-label { transition: opacity 0.4s ease; }
-#view-label.is-switching { opacity: 0; }
 
 .hero__content {
   position: relative;
@@ -634,11 +605,10 @@ a:hover { text-decoration-color: var(--ink-0); }
   .nav__burger.is-open span:nth-child(2) { opacity: 0; }
   .nav__burger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .story__stats { grid-template-columns: 1fr; }
-  .hero__hud { top: 4.6rem; right: 1.2rem; font-size: 0.62rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .hero__scroll-line, .hud__dot, .pulse-dot { animation: none; }
+  .hero__scroll-line, .pulse-dot { animation: none; }
 }
